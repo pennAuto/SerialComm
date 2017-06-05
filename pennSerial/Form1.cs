@@ -62,6 +62,7 @@ namespace pennSerial
         private void btnClosePort_Click(object sender, EventArgs e)
         {
             serialPort1.Close();
+            txtReceive.Text = "";
             progressBar1.Value = 0;
             btnSend.Enabled = false;
             btnReceive.Enabled = false;
@@ -79,7 +80,15 @@ namespace pennSerial
         private void btnSend_Click(object sender, EventArgs e)
         {
             txtReceive.Text = "";
-            //int sendVal = Convert.ToInt32(txtSend.Text);
+            //Testing using buffer
+            //TODO 
+            // V1
+            // Create protocol
+            // Send with checking
+            // int sendVal = Convert.ToInt32(txtSend.Text);
+            //
+            // V2 - gCode
+            //
             byte[] buffer = new byte[1];
             buffer[0] = 2;
             serialPort1.Write(buffer, 0, 1);
@@ -93,7 +102,6 @@ namespace pennSerial
             try
             {
                 txtReceive.Text = serialPort1.ReadLine();
-                //txtReceive.Text = serialPort1.ReadExisting();
             }
             catch (TimeoutException)
             {
